@@ -24,14 +24,18 @@ COPY /config/z-push/backend-carddav.conf /var/www/z-push/backend/carddav/config.
 COPY /config/z-push/backend-caldav.conf /var/www/z-push/backend/caldav/config.php
 
 # copy webserver config
-COPY /conf/nginx.conf /etc/nginx/
-COPY /conf/php-fpm.conf /etc/php/
+COPY /config/nginx.conf /etc/nginx/
+COPY /config/php-fpm.conf /etc/php/
 
 # Export ports
-EXPORT 80 443
+EXPOSE 80 443
 
 # volume 
 VOLUME /media/z-push
+
+# prepare init script for start
+ADD init.sh /init.sh
+RUN chmod +x /init.sh
 
 # starting command
 CMD [ "/init.sh" ]

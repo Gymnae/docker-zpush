@@ -1,3 +1,5 @@
+#!/bin/sh
+
 # ready them folders
 mkdir -p /media/z-push/log/z-push \
         /media/z-push/log/nginx \
@@ -5,8 +7,8 @@ mkdir -p /media/z-push/log/z-push \
 chown -R nginx:www-data /media/z-push/
 
 if [ ! -d /usr/local/src ]; then
-  mkdir -p /usr/local/src \
-  cd /usr/local/src \
+  mkdir -p /usr/local/src 
+  cd /usr/local/src 
   curl -LSs https://gitlab.com/davical-project/awl/repository/archive.tar.gz | tar xz
 fi
 
