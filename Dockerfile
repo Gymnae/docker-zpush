@@ -26,7 +26,8 @@ RUN mkdir /var/log/z-push /var/lib/z-push \
     && cd /usr/local/src \
     && curl -LSs https://gitlab.com/davical-project/awl/repository/archive.tar.gz | tar xz
     
-# copy config files
+# copy config files - some standards are defined, many settings can be adjusted via env parameters
+COPY /config/z-push/config.conf /usr/share/z-push/backend/config.php
 COPY /config/z-push/backend-config.conf /usr/share/z-push/backend/combined/config.php
 COPY /config/z-push/backend-imap.conf /usr/share/z-push/backend/imap/config.php
 COPY /config/z-push/backend-carddav.conf /usr/share/z-push/backend/carddav/config.php
