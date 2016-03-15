@@ -5,7 +5,6 @@ COPY /conf/nginx.conf /etc/nginx/
 
 # install packages
 RUN apk-install \
-    php-pecl-memprof \
     mailcap
 
 # ENV variables for z-push
@@ -26,10 +25,12 @@ RUN mkdir /var/log/z-push /var/lib/z-push \
     && mkdir -p /usr/local/src \
     && cd /usr/local/src \
     && curl -LSs https://gitlab.com/davical-project/awl/repository/archive.tar.gz | tar xz
-
-# z-push folder
-VOLUME /var/www/z-push
-VOLUME /usr/share/z-push
+    
+# copy config files
+COPY /config/z-push/backend-config.conf /usr/share/z-push/backend/combined/config.php
+COPY /config/z-push/backend-imap.conf /usr/share/z-push/backend/imap/config.php
+COPY /config/z-push/backend-carddav.conf /usr/share/z-push/backend/carddav/config.php
+COPY /config/z-push/backend-caldav.conf /usr/share/z-push/backend/caldav/config.php
 
 # Export ports
 EXPORT 80 443
