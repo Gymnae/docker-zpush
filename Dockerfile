@@ -17,7 +17,7 @@ RUN cd /tmp && \
     && cp -R z-push-$Z_PUSH_MINOR/* /var/www/z-push/
     
 # copy config files - some standards are defined, many settings can be adjusted via env parameters
-COPY /config/z-push/config.conf /var/www/z-push/backend/config.php
+COPY /config/z-push/config.conf /var/www/z-push/config.php
 COPY /config/z-push/backend-config.conf /var/www/z-push/backend/combined/config.php
 COPY /config/z-push/backend-imap.conf /var/www/z-push/backend/imap/config.php
 COPY /config/z-push/backend-carddav.conf /var/www/z-push/backend/carddav/config.php
