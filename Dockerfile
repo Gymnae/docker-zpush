@@ -1,8 +1,6 @@
 FROM gymnae/webserverbase
 MAINTAINER Gunnar Falk <docker@grundstil.de>
 
-COPY /conf/nginx.conf /etc/nginx/
-
 # install packages
 RUN apk-install \
     mailcap
@@ -32,6 +30,8 @@ COPY /config/z-push/backend-config.conf /usr/share/z-push/backend/combined/confi
 COPY /config/z-push/backend-imap.conf /usr/share/z-push/backend/imap/config.php
 COPY /config/z-push/backend-carddav.conf /usr/share/z-push/backend/carddav/config.php
 COPY /config/z-push/backend-caldav.conf /usr/share/z-push/backend/caldav/config.php
+COPY /conf/nginx.conf /etc/nginx/
+COPY /conf/php-fpm.conf /etc/php/
 
 # Export ports
 EXPORT 80 443
