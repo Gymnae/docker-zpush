@@ -13,7 +13,7 @@ if [ ! -d /usr/local/src ]; then
 fi
 
 #SED replacement
-sed -i "" "s|${TIME_ZONE}|${TIME_ZONE:-Europe/London}|g"; \
+ sed -i.bak 's,^\(TIME_ZONE =\).*,\1'${TIME_ZONE:-Europe/London}','; \
         s/baz/zab/g; s/Alice/Joan/g' \
         /var/www/z-push/config.php
 
