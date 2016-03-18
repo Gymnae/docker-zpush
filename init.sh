@@ -14,7 +14,7 @@ fi
 
 #SED replacements
         # for main config.php
-        sed -i.bak 's,^\(TIME_ZONE =\).*,\1'${TIME_ZONE:-Europe/London}',' /var/www/z-push/config.php
+        ed -i "s|\$TIME_ZONE|${TIME_ZONE:-Europe/London}|g"  /var/www/z-push/config.php
         
         # for backend imap config
        sed -i.bak \
