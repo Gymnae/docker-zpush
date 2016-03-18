@@ -14,37 +14,32 @@ fi
 
 #SED replacements
         # for main config.php
-        ed -i "s|\$TIME_ZONE|${TIME_ZONE:-Europe/London}|g"  /var/www/z-push/config.php
+        sed -i.back \
+        "s|\$TIME_ZONE|${TIME_ZONE:-Europe/London}|g"  \
+        /var/www/z-push/config.php
         
         # for backend imap config
        sed -i.bak \
-       's,^\('IMAP_SERVER', \).*,\1'${IMAPSERVER:-imapcontainer}','; \
-       's,^\('IMAP_PORT', \).*,\1'${IMAPSERVERPORT:-143}','; \
-       's,^\('$imap_smtp_params = array('host' => ', \).*,\1'${SMTPSERVER:-smtpserver}','; \
+       "s|\$IMAP_SERVER|${IMAP_SERVER:-imapcontainer}|g" ; \
+       "s|\$IMAP_PORT|${IMAP_PORT:-143}|g" ; \
+       "s|\$SMTP_SERVER|${SMTP_SERVER:-smtcontainer}|g" ; \
        /var/www/z-push/backend/imap/config.php 
-
-
-# Associative array where key represents a search string,
-# and the value itself represents the replace string.
-declare -A confs
-confs=(
-    [%%DB_USER%%]=bob
-    [%%DB_NAME%%]=bobs_db
-    [%%DB_PASSWORD%%]=hammertime
-    [%%DB_HOST%%]=localhost
-)
-
-configurer() {
-    # Loop the config array
-    for i in "${!confs[@]}"
-    do
-        search=$i
-        replace=${confs_wp[$i]}
-        # Note the "" after -i, needed in OS X
-        sed -i "" "s/${search}/${replace}/g" config.php
-    done
-}
-configurer
+       
+       # for backed carddav config
+       sed -i.bak \
+       "s|\$CARDDAV_PORT|${CARDDAV_PORT:-443}|g" ; \
+       "s|\$CARDDAV_SERVER|${CARDDAV_SERVER:-carddavserver}|g" ; \
+       "s|\$CARDDAV_PROT|${CARDDAV_PROT:-https}|g" ; \
+       "s|/caldav.php/%u/|${CARDDAV_PATH:-/caldav.php/%u/}|g" ; \
+       /var/www/z-push/backend/carddav/config.php 
+       
+       # for backend caldav config
+       sed -i.bak \
+       "s|\$CALDAV_PORT|${CALDAV_PORT:-443}|g" ; \
+       "s|\$CALDAV_SERVER|${CALDAV_SERVER:-caldavserver}|g" ; \
+       "s|\$CALDAV_PROT|${CALDAV_PROT:-https}|g" ; \
+       "s|/caldav.php/%u/|${CALDAV_PATH:-/caldav.php/%u/}|g" ; \
+       /var/www/z-push/backend/caldav/config.php 
 
 # start php-fpm
 php-fpm
