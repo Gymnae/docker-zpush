@@ -12,10 +12,16 @@ if [ ! -d /usr/local/src ]; then
   curl -LSs https://gitlab.com/davical-project/awl/repository/archive.tar.gz | tar xz
 fi
 
-#SED replacement
- sed -i.bak 's,^\(TIME_ZONE =\).*,\1'${TIME_ZONE:-Europe/London}','; \
-        s/baz/zab/g; s/Alice/Joan/g' \
-        /var/www/z-push/config.php
+#SED replacements
+        # for main config.php
+        sed -i.bak 's,^\(TIME_ZONE =\).*,\1'${TIME_ZONE:-Europe/London}',' /var/www/z-push/config.php
+        
+        # for backend imap config
+       sed -i.bak \
+       's,^\('IMAP_SERVER', \).*,\1'${IMAPSERVER:-imapcontainer}','; \
+       's,^\('IMAP_PORT', \).*,\1'${IMAPSERVERPORT:-143}','; \
+       's,^\('$imap_smtp_params = array('host' => ', \).*,\1'${SMTPSERVER:-smtpserver}','; \
+       /var/www/z-push/backend/imap/config.php 
 
 
 # Associative array where key represents a search string,
