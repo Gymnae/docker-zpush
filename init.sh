@@ -23,15 +23,15 @@ fi
         
         # for backend imap config
        sed -i.bak \
-       -e "s|\$IMAP_SERVER|${IMAP_SERVER:-imapcontainer}|g"\
-       -e "s|\$IMAP_PORT|${IMAP_PORT:-143}|g"\
-       -e "s|\$SMTP_SERVER|${SMTP_SERVER:-smtpcontainer}|g"   \
-       	-e "s|\$SMTP_AUTH|${SMTP_AUTH:-true}|g"   \				# true or false
-	-e "s|\$IMAP_USER|${IMAP_USER:-editme}|g"   \
-	-e "s|\$IMAP_PW|${IMAP_PW:-passme}|g"   \
-	-e "s|\$SMTP_VERIFY_PEER|${SMTP_VERIFY_PEER:-true}|g"   \			# true or false
-	-e "s|\$SMTP_VERIFY_PEER_NAME|${SMTP_VERIFY_PEER_NAME:-true}|g"   \		# true or false
-	-e "s|\$SMTP_ALLOW_SELF_SIGNED|${SMTP_ALLOW_SELF_SIGNED:-false}|g"   \	# true or false
+	-e "s|\$IMAP_SERVER|${IMAP_SERVER:-imapcontainer}|g"\
+	-e "s|\$IMAP_PORT|${IMAP_PORT:-143}|g"\
+	-e "s|\$SMTP_SERVER|${SMTP_SERVER:-smtpcontainer}|g"\
+	-e "s|\$SMTP_AUTH|${SMTP_AUTH:-true}|g"\
+	-e "s|\$IMAP_USER|${IMAP_USER:-editme}|g"\
+	-e "s|\$IMAP_PW|${IMAP_PW:-passme}|g"\
+	-e "s|\$SMTP_VERIFY_PEER|${SMTP_VERIFY_PEER:-true}|g"\
+	-e "s|\$SMTP_VERIFY_PEER_NAME|${SMTP_VERIFY_PEER_NAME:-true}|g"\
+	-e "s|\$SMTP_ALLOW_SELF_SIGNED|${SMTP_ALLOW_SELF_SIGNED:-false}|g"   \
        /var/www/z-push/backend/imap/config.php 
        
        # for backed carddav config

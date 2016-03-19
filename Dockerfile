@@ -3,7 +3,9 @@ MAINTAINER Gunnar Falk <docker@grundstil.de>
 
 # install packages
 RUN apk-install \
-    mailcap
+    mailcap \
+    php-posix \ 
+    php-soap
 
 # ENV variables for z-push
 ENV Z_PUSH_MAJOR 2.2
