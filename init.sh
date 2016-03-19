@@ -1,11 +1,11 @@
 #!/bin/sh
 
 # ready them folders
-mkdir -vp /media/z-push/log/z-push/ \
-          /media/z-push/log/nginx/ \
-          /media/z-push/log/php-fpm/ \
-          /media/z-push/z-push/statedir/ \
-	  /media/z-push/certs/
+	mkdir -p /media/z-push/log/z-push \
+ 	         /media/z-push/log/nginx \	
+	         /media/z-push/log/php-fpm \
+         	 /media/z-push/z-push/statedir \
+	 	 /media/z-push/certs
 
 chown -R nginx:www-data /media/z-push/
 

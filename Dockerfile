@@ -5,7 +5,12 @@ MAINTAINER Gunnar Falk <docker@grundstil.de>
 RUN apk-install \
     mailcap \
     php-posix \ 
-    php-soap
+    php-soap \
+    php-xsl \
+    php-imap \
+    php-pcntl \
+    php-sysvshm \
+    php-sysvsem 
 
 # ENV variables for z-push
 ENV Z_PUSH_MAJOR 2.2
