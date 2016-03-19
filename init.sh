@@ -20,25 +20,25 @@ fi
         
         # for backend imap config
        sed -i.bak \
-       "s|\$IMAP_SERVER|${IMAP_SERVER:-imapcontainer}|g" ; \
-       "s|\$IMAP_PORT|${IMAP_PORT:-143}|g" ; \
-       "s|\$SMTP_SERVER|${SMTP_SERVER:-smtcontainer}|g" ; \
+       -e "s|\$IMAP_SERVER|${IMAP_SERVER:-imapcontainer}|g"\
+       -e "s|\$IMAP_PORT|${IMAP_PORT:-143}|g"\
+       -e "s|\$SMTP_SERVER|${SMTP_SERVER:-smtcontainer}|g"   \
        /var/www/z-push/backend/imap/config.php 
        
        # for backed carddav config
        sed -i.bak \
-       "s|\$CARDDAV_PORT|${CARDDAV_PORT:-443}|g" ; \
-       "s|\$CARDDAV_SERVER|${CARDDAV_SERVER:-carddavserver}|g" ; \
-       "s|\$CARDDAV_PROT|${CARDDAV_PROT:-https}|g" ; \
-       "s|/caldav.php/%u/|${CARDDAV_PATH:-/caldav.php/%u/}|g" ; \
-       /var/www/z-push/backend/carddav/config.php 
+       -e "s|\$CARDDAV_PORT|${CARDDAV_PORT:-443}|g"\
+       -e "s|\$CARDDAV_SERVER|${CARDDAV_SERVER:-carddavserver}|g"\
+       -e "s|\$CARDDAV_PROT|${CARDDAV_PROT:-https}|g"\
+       -e "s|/caldav.php/%u/|${CARDDAV_PATH:-/caldav.php/%u/}|g"  \
+        /var/www/z-push/backend/carddav/config.php 
        
        # for backend caldav config
        sed -i.bak \
-       "s|\$CALDAV_PORT|${CALDAV_PORT:-443}|g" ; \
-       "s|\$CALDAV_SERVER|${CALDAV_SERVER:-caldavserver}|g" ; \
-       "s|\$CALDAV_PROT|${CALDAV_PROT:-https}|g" ; \
-       "s|/caldav.php/%u/|${CALDAV_PATH:-/caldav.php/%u/}|g" ; \
+       -e "s|\$CALDAV_PORT|${CALDAV_PORT:-443}|g"\
+       -e "s|\$CALDAV_SERVER|${CALDAV_SERVER:-caldavserver}|g"\
+       -e "s|\$CALDAV_PROT|${CALDAV_PROT:-https}|g"\
+       -e "s|/caldav.php/%u/|${CALDAV_PATH:-/caldav.php/%u/}|g"  \
        /var/www/z-push/backend/caldav/config.php 
 
 # start php-fpm
