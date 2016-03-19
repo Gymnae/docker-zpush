@@ -1,9 +1,12 @@
 #!/bin/sh
 
 # ready them folders
-mkdir -p /media/z-push/log/z-push \
-        /media/z-push/log/nginx \
-        /media/z-push/log/php-fpm
+mkdir -vp /media/z-push/log/z-push/ \
+          /media/z-push/log/nginx/ \
+          /media/z-push/log/php-fpm/ \
+          /media/z-push/z-push/statedir/ \
+	  /media/z-push/certs/
+
 chown -R nginx:www-data /media/z-push/
 
 if [ ! -d /usr/local/src ]; then
@@ -22,13 +25,13 @@ fi
        sed -i.bak \
        -e "s|\$IMAP_SERVER|${IMAP_SERVER:-imapcontainer}|g"\
        -e "s|\$IMAP_PORT|${IMAP_PORT:-143}|g"\
-       -e "s|\$SMTP_SERVER|${SMTP_SERVER:-smtcontainer}|g"   \
+       -e "s|\$SMTP_SERVER|${SMTP_SERVER:-smtpcontainer}|g"   \
        /var/www/z-push/backend/imap/config.php 
        
        # for backed carddav config
        sed -i.bak \
        -e "s|\$CARDDAV_PORT|${CARDDAV_PORT:-443}|g"\
-       -e "s|\$CARDDAV_SERVER|${CARDDAV_SERVER:-carddavserver}|g"\
+       -e "s|\$CARDDAV_SERVER|${CARDDAV_SERVER:-carddavcontainer}|g"\
        -e "s|\$CARDDAV_PROT|${CARDDAV_PROT:-https}|g"\
        -e "s|/caldav.php/%u/|${CARDDAV_PATH:-/caldav.php/%u/}|g"  \
         /var/www/z-push/backend/carddav/config.php 
@@ -36,7 +39,7 @@ fi
        # for backend caldav config
        sed -i.bak \
        -e "s|\$CALDAV_PORT|${CALDAV_PORT:-443}|g"\
-       -e "s|\$CALDAV_SERVER|${CALDAV_SERVER:-caldavserver}|g"\
+       -e "s|\$CALDAV_SERVER|${CALDAV_SERVER:-caldavcontainer}|g"\
        -e "s|\$CALDAV_PROT|${CALDAV_PROT:-https}|g"\
        -e "s|/caldav.php/%u/|${CALDAV_PATH:-/caldav.php/%u/}|g"  \
        /var/www/z-push/backend/caldav/config.php 
